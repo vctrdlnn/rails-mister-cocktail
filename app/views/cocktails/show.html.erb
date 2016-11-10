@@ -5,5 +5,20 @@
   <%= @cocktail.name %>
 </p>
 
+<p><ul>
+  <% @cocktail.doses.each do |dose| %>
+    <li>
+      <%= "#{Ingredient.find(dose.ingredient_id).name} : #{dose.description}" %>
+      <%= link_to cocktail_dose_path(@cocktail.id, dose.id) , method: :delete, data: {confirm: "are you sure ?"} do %>
+          <i class="fa fa-trash" aria-hidden="true"></i>
+      <% end %>
+    </li>
+  <% end %>
+</ul></p>
+
 <%= link_to 'Edit', edit_cocktail_path(@cocktail) %> |
 <%= link_to 'Back', cocktails_path %>
+
+<p>Add dose here:</p>
+<% @dose = Dose.new %>
+<%= render 'doses/form', locals: {dose: @dose, cocktail: @cocktail} %>
