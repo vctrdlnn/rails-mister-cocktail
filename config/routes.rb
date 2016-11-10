@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   end
 
   # resources :doses, only: [:destroy]
-  # delete 'cocktail_dose', to: 'doses#destroy'
+  delete 'doses/:id', to: 'doses#destroy'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'cocktails#index'

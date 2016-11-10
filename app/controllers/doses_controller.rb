@@ -1,5 +1,5 @@
 class DosesController < ApplicationController
-  before_action :set_cocktail, only: [:new, :create, :index, :destroy]
+  before_action :set_cocktail, only: [:new, :create, :index]
   before_action :set_dose, only: [:destroy]
 
   def index
@@ -21,7 +21,7 @@ class DosesController < ApplicationController
 
   def destroy
     @dose.destroy
-    redirect_to @cocktail, notice: 'Cocktail was successfully updated.'
+    redirect_to :back, notice: 'Ingredient was successfully deleted.'
   end
 
   private
