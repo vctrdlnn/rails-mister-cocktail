@@ -6,7 +6,9 @@
   </strong>
 </p>
 <p>
-  <%= image_tag @cocktail.photo.url(:cocktail) %>
+  <% if @cocktail[:photo] %>
+    <%= image_tag @cocktail.photo.url(:cocktail) %>
+  <% end %>
 </p>
 
 <ul>

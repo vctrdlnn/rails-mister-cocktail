@@ -17,6 +17,11 @@ class PhotoUploader < CarrierWave::Uploader::Base
       width: 150, height: 150, crop: :thumb, gravity: :face
   end
 
+  version :thumbnail do
+    cloudinary_transformation effect: "brightness:30", radius: 20,
+      width: , height: 150, gravity: :auto, crop: :fill
+  end
+
   version :cocktail do
     cloudinary_transformation effect: "art:primavera", radius: 10, width: 250,
     height: 350, gravity: "auto", crop: "fill"
