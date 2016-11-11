@@ -60,3 +60,5 @@ gem "better_errors"
 gem "binding_of_caller"
 gem 'rails_12factor', group: :production
 gem 'figaro'
+gem 'cloudinary', '1.1.0'
+gem 'carrierwave'

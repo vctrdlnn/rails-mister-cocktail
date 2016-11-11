@@ -1,10 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 
 # require 'json'
 # require 'open‐uri'
@@ -14,6 +7,13 @@
 
 # pour scrapper: https://www.atelier-cocktail.com/recette-ingredients-dans-mon-frigo/
 
+# Pour seed des images et les ajouter !
+# url = "http://static.giantbomb.com/uploads/original/9/99864/2419866-nes_console_set.png"
+# product = Product.new(name: 'NES')
+# product.remote_photo_url = url
+# product.save
+
+Ingredient.delete
 ingredients_array = [
  { name: "Vodka ", category: "Alcool", unit: "cl" } ,
  { name: "Gin ", category: "Alcool", unit: "cl" } ,
