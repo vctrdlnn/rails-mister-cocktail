@@ -6,7 +6,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
   process eager: true  # Force version generation at upload time.
 
-  process convert: 'jpg'
+  process convert: 'png'
 
   version :standard do
     resize_to_fit 800, 600
@@ -18,13 +18,13 @@ class PhotoUploader < CarrierWave::Uploader::Base
   end
 
   version :thumbnail do
-    cloudinary_transformation effect: "brightness:30", radius: 20,
-      width: , height: 150, gravity: :auto, crop: :fill
+    cloudinary_transformation effect: "brightness:30", radius: :max,
+      width: 80, height: 130, gravity: :auto, crop: :thumb, :border=>"1px_solid_grey"
   end
 
   version :cocktail do
-    cloudinary_transformation effect: "art:primavera", radius: 10, width: 250,
-    height: 350, gravity: "auto", crop: "fill"
+    cloudinary_transformation effect: "art:primavera", radius: 10, width: 400,
+    height: 400, gravity: "auto", crop: "fill"
   end
 
 

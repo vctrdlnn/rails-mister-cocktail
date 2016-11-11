@@ -1,29 +1,74 @@
-<p id="notice"><%= notice %></p>
+<div class="wrapper">
+  <div class="page-header">
+    <h2>
+      <%= @cocktail.name %>
+    </h2>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-6">
+        <h3>How to make it?</h3>
+        <table class="table table-hover">
+            <colgroup>
+              <col>
+              <col class="align-right">
+            </colgroup>
+          <thead>
+            <tr>
+              <th>Ingredients</th>
+              <th>Les doses</th>
+              <th>Delete?</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <%= simple_form_for [@cocktail, @dose] do |f| %>
+              <tr class="warning">
+                <td>
+                  <%= f.input :ingredient_id, collection: @ingredients, label: false, placeholder: 'Ingredient' %>
+                </td>
+                <td>
+                  <%= f.input :description, label: false, placeholder: 'Details' %>
+                </td>
+                <td>
+                  <%= f.button :submit, "Add", class: "btn btn-primary" %>
+                </td>
+              </tr>
+            <% end %>
+          </tfoot>
+          <tbody>
+           <% @cocktail.doses.each do |dose| %>
+              <tr>
+                <td class="text-left"><%= dose.ingredient.name %></td>
+                <td class="text-right"><%= dose.description %></td>
+                <td class="text-right">
+                  <%= link_to dose_path(dose.id) , method: :delete, data: {confirm: "are you sure ?"} do %>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-xs-6 thumbnail">
+        <% if @cocktail[:photo] %>
+          <%= image_tag @cocktail.photo.url(:cocktail) %>
+        <% else %>
+          <%= simple_form_for @cocktail do |f| %>
+            <%= f.input :photo %>
+            <%= f.input :photo_cache, as: :hidden %>
+            <%= f.button :submit %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <p>
 
-<p>
-  <strong>
-    <%= @cocktail.name %>
-  </strong>
-</p>
-<p>
-  <% if @cocktail[:photo] %>
-    <%= image_tag @cocktail.photo.url(:cocktail) %>
-  <% end %>
-</p>
+  </p>
 
-<ul>
-  <% @cocktail.doses.each do |dose| %>
-  <li>
-  <%= "#{dose.ingredient.name} : #{dose.description}" %>
-    <%= link_to dose_path(dose.id) , method: :delete, data: {confirm: "are you sure ?"} do %>
-    <i class="fa fa-trash" aria-hidden="true"></i>
-    <% end %>
-  </li>
-  <% end %>
-</ul>
+
+</div>
 
 <%= link_to 'Edit', edit_cocktail_path(@cocktail) %> |
 <%= link_to 'Back', cocktails_path %>
-
-<p>Add dose here:</p>
-<%= render 'doses/form', locals: {dose: @dose, cocktail: @cocktail} %>

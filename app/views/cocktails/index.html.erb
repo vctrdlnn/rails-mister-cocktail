@@ -1,42 +1,49 @@
 <%= render "shared/banner" %>
+<%= render "shared/features" %>
 
 <p id="notice"><%= notice %></p>
 
-<h1>Cocktails</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @cocktails.each do |cocktail| %>
-      <tr>
-        <td><%= cocktail.name %></td>
-        <td><%= link_to 'Show', cocktail %></td>
-        <td><%= link_to 'Edit', edit_cocktail_path(cocktail) %></td>
-        <td><%= link_to 'Destroy', cocktail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class="wrapper bg-light-grey">
+  <h1>Discover all our cocktails!</h1>
+  <p>
+    Can't find what you like ?
+    <%= link_to new_cocktail_path do %>
+    <span class="btn btn-primary">Add one!</span>
     <% end %>
-  </tbody>
-</table>
+  </p>
 
-<br>
+  <div class="container">
+    <div class="row">
 
-<%= link_to 'New Cocktail', new_cocktail_path %>
+      <% @cocktails.each do |cocktail| %>
 
 
-<div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('background.jpg');">
-  <div class="card-category">Popular</div>
-  <div class="card-description">
-    <h2><%= cocktail.name %></h2>
-    <p>cocktail description</p>
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5)), url( <%= asset_path('card-background.jpg') %> );">
+              <div class="card-category">Popular</div>
+              <div class="card-description">
+                <h2><%= cocktail.name %></h2>
+                <p>
+                  <%= link_to edit_cocktail_path(cocktail) do %>
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                  <% end %> |
+                  <%= link_to cocktail, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                  <% end %>
+                </p>
+              </div>
+              <div class="card-thumbnail">
+                <% if cocktail[:photo] %>
+                <%= image_tag cocktail.photo.url(:thumbnail) %>
+                <% end %>
+              </div>
+              <%= link_to "", cocktail, {class: "card-link"} %>
+            </div>
+          </div>
+        <% end %>
+    </div>
   </div>
-  <% if @cocktail[:photo] %>
-    <%= image_tag @cocktail.photo.url(:cocktail) %>
-  <% end %>
-  <a class="card-link" href="#" ></a>
 </div>
+
+<%= render "shared/email" %>

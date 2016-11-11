@@ -1,1 +1,17 @@
 // Your footer style
+.footer {
+  background-color: #333333;
+  padding: 40px 0;
+
+  color: #cccccc;
+  text-decoration: none;
+}
+.footer li{
+  padding: 0 20px;
+}
+.footer a {
+  color: inherit;
+}
+.footer p {
+  text-align: right;
+}

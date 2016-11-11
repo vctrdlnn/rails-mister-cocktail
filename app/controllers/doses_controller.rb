@@ -6,6 +6,7 @@ class DosesController < ApplicationController
   end
 
   def new
+    @ingredients = Ingredient.all
     @dose = Dose.new
   end
 
