@@ -51,13 +51,17 @@ class CocktailsController < ApplicationController
     end
   end
 
+  def search
+    fail
+  end
+
   private
     def set_cocktail
       @cocktail = Cocktail.find(params[:id])
     end
 
     def set_ingredients
-      @ingredients = Ingredient.all
+      @ingredients = Ingredient.all.order(:name)
     end
 
     def cocktail_params
